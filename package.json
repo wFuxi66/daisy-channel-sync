@@ -1,0 +1,35 @@
+{
+  "name": "daisy-channel-sync",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run",
+    "test:chaos": "CHAOS_SEEDS=100 vitest run tests/chaos.test.ts",
+    "db:up": "docker compose up -d --wait",
+    "db:migrate": "node --env-file=.env.local --import tsx scripts/migrate.ts",
+    "db:seed": "node --env-file=.env.local --import tsx scripts/seed.ts",
+    "mock:artisia": "node --env-file=.env.local --import tsx scripts/mock-artisia.ts"
+  },
+  "dependencies": {
+    "next": "16.4.0",
+    "postgres": "^3.4.9",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "^4.6.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^5.0.4"
+  },
+  "type": "module"
+}

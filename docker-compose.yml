@@ -1,0 +1,18 @@
+# Postgres local pour le dev et les tests.
+# Même version majeure que Supabase (Postgres 17). En prod, la base est celle du projet Supabase.
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: daisy
+    ports:
+      - "54329:5432"
+    volumes:
+      - ./scripts/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 2s
+      retries: 20
